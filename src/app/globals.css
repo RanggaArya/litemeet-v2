@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Fix for camera zooming and cropping on mobile */
+.lk-video-track, .lk-participant-tile video, video {
+  object-fit: contain !important;
+}
+
+.lk-participant-tile, .lk-video-container {
+  background-color: black !important;
+}
+
+.lk-video-container video {
+  width: 100% !important;
+  height: 100% !important;
+}
