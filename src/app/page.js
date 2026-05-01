@@ -916,17 +916,17 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
       </div>
 
       {/* --- AREA BAWAH: CONTROL BAR --- */}
-      <div className="flex-shrink-0 flex justify-center py-2 sm:py-6 bg-gray-950 z-50 border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] hide-in-pip w-full">
-        <div className="flex items-center gap-1.5 sm:gap-4 bg-gray-900/80 backdrop-blur-2xl px-2 sm:px-8 py-2 sm:py-4 rounded-[1rem] sm:rounded-3xl border border-white/10 shadow-2xl transition-transform hover:scale-[1.01] max-w-[98vw] overflow-x-auto no-scrollbar">
+      <div className="flex-shrink-0 flex justify-center py-2 sm:py-4 bg-gradient-to-t from-black/40 to-transparent z-50 hide-in-pip w-full">
+        <div className="flex items-center gap-1.5 sm:gap-3 bg-white/5 backdrop-blur-2xl px-3 sm:px-6 py-2 sm:py-3 rounded-2xl sm:rounded-3xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] max-w-[98vw] overflow-x-auto no-scrollbar">
 
           {/* === MIC BUTTON WITH DEVICE SELECTOR === */}
           <div className="relative flex items-center flex-shrink-0">
-            <button onClick={toggleMic} className={`p-2.5 sm:p-4 rounded-l-xl sm:rounded-l-2xl transition-all duration-300 ${isMuted ? 'bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
+            <button onClick={toggleMic} className={`p-2.5 sm:p-3 rounded-l-xl sm:rounded-l-2xl transition-all duration-300 ${isMuted ? 'bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]' : 'bg-white/10 text-white hover:bg-white/20'}`}>
               <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: isMuted ? ICONS.micOff : ICONS.mic }} />
             </button>
             <button
               onClick={() => { setShowMicSelector(!showMicSelector); setShowCamSelector(false); refreshDevices(); }}
-              className={`p-1.5 sm:p-2.5 rounded-r-xl sm:rounded-r-2xl border-l transition-all duration-300 ${isMuted ? 'bg-red-600 border-red-400/30 text-white hover:bg-red-400' : 'bg-gray-800/80 border-white/10 text-gray-400 hover:bg-gray-700 hover:text-white'}`}
+              className={`p-1.5 sm:p-2 rounded-r-xl sm:rounded-r-2xl border-l transition-all duration-300 ${isMuted ? 'bg-red-600 border-red-400/30 text-white hover:bg-red-400' : 'bg-white/10 border-white/10 text-gray-400 hover:bg-white/20 hover:text-white'}`}
               title="Pilih Mikrofon"
             >
               <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.chevronDown }} />
@@ -944,12 +944,12 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
 
           {/* === CAM BUTTON WITH DEVICE SELECTOR === */}
           <div className="relative flex items-center flex-shrink-0">
-            <button onClick={toggleCam} className={`p-2.5 sm:p-4 rounded-l-xl sm:rounded-l-2xl transition-all duration-300 ${isCamOff ? 'bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
+            <button onClick={toggleCam} className={`p-2.5 sm:p-3 rounded-l-xl sm:rounded-l-2xl transition-all duration-300 ${isCamOff ? 'bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]' : 'bg-white/10 text-white hover:bg-white/20'}`}>
               <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: isCamOff ? ICONS.camOff : ICONS.cam }} />
             </button>
             <button
               onClick={() => { setShowCamSelector(!showCamSelector); setShowMicSelector(false); refreshDevices(); }}
-              className={`p-1.5 sm:p-2.5 rounded-r-xl sm:rounded-r-2xl border-l transition-all duration-300 ${isCamOff ? 'bg-red-600 border-red-400/30 text-white hover:bg-red-400' : 'bg-gray-800/80 border-white/10 text-gray-400 hover:bg-gray-700 hover:text-white'}`}
+              className={`p-1.5 sm:p-2 rounded-r-xl sm:rounded-r-2xl border-l transition-all duration-300 ${isCamOff ? 'bg-red-600 border-red-400/30 text-white hover:bg-red-400' : 'bg-white/10 border-white/10 text-gray-400 hover:bg-white/20 hover:text-white'}`}
               title="Pilih Kamera"
             >
               <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.chevronDown }} />
@@ -966,7 +966,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
           </div>
 
           {/* === SCREEN SHARE === */}
-          <button onClick={toggleScreen} className={`hidden md:block p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${isSharing ? 'bg-green-500 text-white' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
+          <button onClick={toggleScreen} className={`hidden md:block p-2.5 sm:p-3 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${isSharing ? 'bg-green-500 text-white' : 'bg-white/10 text-white hover:bg-white/20'}`}>
             <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.screen }} />
           </button>
 
@@ -975,7 +975,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
             <button
               onClick={() => setOneOnOneMode(m => m === 'grid' ? 'remote-main' : 'grid')}
               title={oneOnOneMode === 'grid' ? "Kembali ke mode PiP" : "Ubah ke mode Grid (Terbelah)"}
-              className={`p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${oneOnOneMode === 'grid' ? 'bg-indigo-600 shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-gray-800/80 hover:bg-gray-700'} text-white`}
+              className={`p-2.5 sm:p-3 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${oneOnOneMode === 'grid' ? 'bg-indigo-600 shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-white/10 hover:bg-white/20'} text-white`}
             >
               <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.layout }} />
             </button>
@@ -986,7 +986,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
             <button
               onClick={handleToggleBrowserPiP}
               title="Buka Popup Window"
-              className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 bg-gray-800/80 text-white hover:bg-gray-700"
+              className="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 bg-white/10 text-white hover:bg-white/20"
             >
               <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.pip }} />
             </button>
@@ -996,47 +996,31 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
           <button
             onClick={toggleDataSaver}
             title={bandwidthMode === 'saver' ? 'Hemat -> HD' : bandwidthMode === 'hd' ? 'HD -> FHD' : 'FHD -> Hemat'}
-            className={`relative p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 group
+            className={`relative p-2.5 sm:p-3 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0
               ${bandwidthMode === 'saver'
-                ? 'bg-emerald-600/80 text-white hover:bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]'
+                ? 'bg-emerald-500/90 text-white hover:bg-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]'
                 : bandwidthMode === 'hd'
-                  ? 'bg-blue-600/80 text-white hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]'
-                  : 'bg-purple-600/80 text-white hover:bg-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.3)]'
+                  ? 'bg-blue-500/90 text-white hover:bg-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.3)]'
+                  : 'bg-purple-500/90 text-white hover:bg-purple-400 shadow-[0_0_20px_rgba(147,51,234,0.3)]'
               }`}
           >
-            <svg className="w-4 h-4 sm:w-5 sm:h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              {bandwidthMode === 'saver' ? (
-                <>
-                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-                  <path d="M8 12l3 3 5-6" />
-                </>
-              ) : bandwidthMode === 'hd' ? (
-                <>
-                  <rect x="5" y="2" width="14" height="20" rx="2" />
-                  <path d="M12 18h.01" />
-                </>
-              ) : (
-                <>
-                  <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
-                  <line x1="7" y1="2" x2="7" y2="22" />
-                  <line x1="17" y1="2" x2="17" y2="22" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <line x1="2" y1="7" x2="7" y2="7" />
-                  <line x1="2" y1="17" x2="7" y2="17" />
-                  <line x1="17" y1="17" x2="22" y2="17" />
-                  <line x1="17" y1="7" x2="22" y2="7" />
-                </>
-              )}
-            </svg>
-            <span className={`absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-bold px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none
-              ${bandwidthMode === 'saver' ? 'bg-emerald-600 text-white' : bandwidthMode === 'hd' ? 'bg-blue-600 text-white' : 'bg-purple-600 text-white'}`}>
-              {bandwidthMode === 'saver' ? '🌿 Hemat' : bandwidthMode === 'hd' ? '🎬 HD' : '🎥 FHD'}
-            </span>
+            <div className="flex flex-col items-center gap-0.5">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {bandwidthMode === 'saver' ? (
+                  <><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" /><path d="M8 12l3 3 5-6" /></>
+                ) : bandwidthMode === 'hd' ? (
+                  <><rect x="5" y="2" width="14" height="20" rx="2" /><path d="M12 18h.01" /></>
+                ) : (
+                  <><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" /><line x1="7" y1="2" x2="7" y2="22" /><line x1="17" y1="2" x2="17" y2="22" /><line x1="2" y1="12" x2="22" y2="12" /></>
+                )}
+              </svg>
+              <span className="text-[8px] font-bold leading-none">{bandwidthMode === 'saver' ? 'Hemat' : bandwidthMode === 'hd' ? 'HD' : 'FHD'}</span>
+            </div>
           </button>
 
           <button
             onClick={() => { setIsChatOpen(!isChatOpen); if (!isChatOpen) setUnreadCount(0); }}
-            className={`relative p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${isChatOpen ? 'bg-indigo-600 text-white shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}
+            className={`relative p-2.5 sm:p-3 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${isChatOpen ? 'bg-indigo-600 text-white shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-white/10 text-white hover:bg-white/20'}`}
           >
             <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.chat }} />
             {unreadCount > 0 && !isChatOpen && (
@@ -1046,7 +1030,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
             )}
           </button>
           <div className="w-px h-6 sm:h-8 bg-white/20 mx-0.5 sm:mx-1 flex-shrink-0"></div>
-          <button onClick={leave} className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-r flex-shrink-0 from-red-600 to-red-500 text-white shadow-lg hover:scale-105 active:scale-95 transition-all">
+          <button onClick={leave} className="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-gradient-to-r flex-shrink-0 from-red-600 to-red-500 text-white shadow-lg hover:scale-105 active:scale-95 transition-all">
             <div className="rotate-[135deg] scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.hangup }} />
           </button>
         </div>
