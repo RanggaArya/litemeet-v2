@@ -1065,7 +1065,7 @@ function OneOnOneLayout({ localTrack, remoteTrack, mode, onSwap }) {
       {miniTrack && (
         <div
           onClick={onSwap}
-          className="absolute top-2 right-2 sm:top-4 sm:right-4 w-24 sm:w-32 md:w-64 aspect-video bg-black rounded-xl overflow-hidden border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.9)] cursor-pointer hover:scale-105 hover:border-white/50 transition-all z-10 duration-300 pip-mini"
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 w-32 sm:w-36 md:w-64 aspect-video bg-black rounded-xl overflow-hidden border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.9)] cursor-pointer hover:scale-105 hover:border-white/50 transition-all z-10 duration-300 pip-mini"
           title="Klik untuk menukar layar"
         >
           <ParticipantTile trackRef={miniTrack} className="w-full h-full" />
