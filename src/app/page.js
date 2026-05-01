@@ -732,9 +732,9 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
           100% { background-position: 200% 0%; }
         }
         .pip-border-overlay { display: none; }
-        @media (max-height: 400px), (max-width: 450px) {
+        @media (max-height: 450px) and (max-width: 450px) {
           .hide-in-pip { display: none !important; }
-          .remove-padding-in-pip { gap: 0 !important; }
+          .remove-padding-in-pip { gap: 0 !important; padding: 0 !important; }
           .pip-fullscreen { border-radius: 0 !important; border: none !important; position: relative; }
           .pip-mini { width: 80px !important; top: 8px !important; right: 8px !important; border-width: 1px !important; }
           
