@@ -316,15 +316,15 @@ function BandwidthMonitor({ bandwidthMode }) {
   const modeLabel = BANDWIDTH_MODES[bandwidthMode]?.label || '';
 
   return (
-    <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl px-3 py-2 flex items-center gap-3 shadow-lg">
-      <div className={`w-2 h-2 rounded-full ${statusDot} animate-pulse`}></div>
+    <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-[10px] sm:rounded-xl px-2 sm:px-3 py-1 sm:py-2 flex items-center gap-1.5 sm:gap-3 shadow-lg">
+      <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${statusDot} animate-pulse`}></div>
       <div className="flex flex-col">
-        <div className={`text-[10px] ${statusColor} font-bold uppercase tracking-wider`}>
+        <div className={`text-[8px] sm:text-[10px] ${statusColor} font-bold uppercase tracking-wider leading-tight`}>
           {modeLabel}
         </div>
-        <div className="flex items-center gap-2 text-[11px]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2 text-[9px] sm:text-[11px] leading-tight mt-0.5 sm:mt-0">
           <span className="text-blue-300">↑ {stats.upload} KB/s</span>
-          <span className="text-gray-600">│</span>
+          <span className="text-gray-600 hidden sm:inline">│</span>
           <span className="text-green-300">↓ {stats.download} KB/s</span>
         </div>
       </div>
@@ -760,10 +760,10 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
       <div className="pip-border-overlay"></div>
 
       {/* --- TOP LEFT INFOS (Bandwidth & Timer) --- */}
-      <div className="absolute top-4 left-4 z-50 flex items-center gap-3 hide-in-pip">
-        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl px-4 flex items-center gap-2 shadow-lg h-[46px]">
-          <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-          <span className="text-white text-sm font-mono font-bold tracking-widest">{durationStr}</span>
+      <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-50 flex flex-col sm:flex-row items-start sm:items-center gap-1.5 sm:gap-3 hide-in-pip max-w-[calc(100vw-110px)]">
+        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-[10px] sm:rounded-xl px-2.5 sm:px-4 flex items-center gap-1.5 sm:gap-2 shadow-lg h-8 sm:h-[46px]">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 animate-pulse"></div>
+          <span className="text-white text-[11px] sm:text-sm font-mono font-bold tracking-widest leading-none">{durationStr}</span>
         </div>
         <BandwidthMonitor bandwidthMode={bandwidthMode} />
       </div>
@@ -921,20 +921,20 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
       </div>
 
       {/* --- AREA BAWAH: CONTROL BAR --- */}
-      <div className="flex-shrink-0 flex justify-center py-6 bg-gray-950 z-50 border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] hide-in-pip">
-        <div className="flex items-center gap-3 sm:gap-4 bg-gray-900/80 backdrop-blur-2xl px-6 sm:px-8 py-3 sm:py-4 rounded-3xl border border-white/10 shadow-2xl transition-transform hover:scale-[1.01]">
+      <div className="flex-shrink-0 flex justify-center py-2 sm:py-6 bg-gray-950 z-50 border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] hide-in-pip w-full">
+        <div className="flex items-center gap-1.5 sm:gap-4 bg-gray-900/80 backdrop-blur-2xl px-2 sm:px-8 py-2 sm:py-4 rounded-[1rem] sm:rounded-3xl border border-white/10 shadow-2xl transition-transform hover:scale-[1.01] max-w-[98vw] overflow-x-auto no-scrollbar">
 
           {/* === MIC BUTTON WITH DEVICE SELECTOR === */}
-          <div className="relative flex items-center">
-            <button onClick={toggleMic} className={`p-3 sm:p-4 rounded-l-2xl transition-all duration-300 ${isMuted ? 'bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
-              <div dangerouslySetInnerHTML={{ __html: isMuted ? ICONS.micOff : ICONS.mic }} />
+          <div className="relative flex items-center flex-shrink-0">
+            <button onClick={toggleMic} className={`p-2.5 sm:p-4 rounded-l-xl sm:rounded-l-2xl transition-all duration-300 ${isMuted ? 'bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
+              <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: isMuted ? ICONS.micOff : ICONS.mic }} />
             </button>
             <button
               onClick={() => { setShowMicSelector(!showMicSelector); setShowCamSelector(false); refreshDevices(); }}
-              className={`p-2 sm:p-2.5 rounded-r-2xl border-l transition-all duration-300 ${isMuted ? 'bg-red-600 border-red-400/30 text-white hover:bg-red-400' : 'bg-gray-800/80 border-white/10 text-gray-400 hover:bg-gray-700 hover:text-white'}`}
+              className={`p-1.5 sm:p-2.5 rounded-r-xl sm:rounded-r-2xl border-l transition-all duration-300 ${isMuted ? 'bg-red-600 border-red-400/30 text-white hover:bg-red-400' : 'bg-gray-800/80 border-white/10 text-gray-400 hover:bg-gray-700 hover:text-white'}`}
               title="Pilih Mikrofon"
             >
-              <div dangerouslySetInnerHTML={{ __html: ICONS.chevronDown }} />
+              <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.chevronDown }} />
             </button>
             {showMicSelector && (
               <DeviceSelector
@@ -948,16 +948,16 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
           </div>
 
           {/* === CAM BUTTON WITH DEVICE SELECTOR === */}
-          <div className="relative flex items-center">
-            <button onClick={toggleCam} className={`p-3 sm:p-4 rounded-l-2xl transition-all duration-300 ${isCamOff ? 'bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
-              <div dangerouslySetInnerHTML={{ __html: isCamOff ? ICONS.camOff : ICONS.cam }} />
+          <div className="relative flex items-center flex-shrink-0">
+            <button onClick={toggleCam} className={`p-2.5 sm:p-4 rounded-l-xl sm:rounded-l-2xl transition-all duration-300 ${isCamOff ? 'bg-red-500 text-white shadow-[0_0_20px_rgba(239,68,68,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
+              <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: isCamOff ? ICONS.camOff : ICONS.cam }} />
             </button>
             <button
               onClick={() => { setShowCamSelector(!showCamSelector); setShowMicSelector(false); refreshDevices(); }}
-              className={`p-2 sm:p-2.5 rounded-r-2xl border-l transition-all duration-300 ${isCamOff ? 'bg-red-600 border-red-400/30 text-white hover:bg-red-400' : 'bg-gray-800/80 border-white/10 text-gray-400 hover:bg-gray-700 hover:text-white'}`}
+              className={`p-1.5 sm:p-2.5 rounded-r-xl sm:rounded-r-2xl border-l transition-all duration-300 ${isCamOff ? 'bg-red-600 border-red-400/30 text-white hover:bg-red-400' : 'bg-gray-800/80 border-white/10 text-gray-400 hover:bg-gray-700 hover:text-white'}`}
               title="Pilih Kamera"
             >
-              <div dangerouslySetInnerHTML={{ __html: ICONS.chevronDown }} />
+              <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.chevronDown }} />
             </button>
             {showCamSelector && (
               <DeviceSelector
@@ -971,8 +971,8 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
           </div>
 
           {/* === SCREEN SHARE === */}
-          <button onClick={toggleScreen} className={`hidden md:block p-3 sm:p-4 rounded-2xl transition-all duration-300 ${isSharing ? 'bg-green-500 text-white' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
-            <div dangerouslySetInnerHTML={{ __html: ICONS.screen }} />
+          <button onClick={toggleScreen} className={`hidden md:block p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${isSharing ? 'bg-green-500 text-white' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}>
+            <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.screen }} />
           </button>
 
           {/* --- ONLY FOR 1v1: TOGGLE GRID/PIP --- */}
@@ -980,9 +980,9 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
             <button 
               onClick={() => setOneOnOneMode(m => m === 'grid' ? 'remote-main' : 'grid')}
               title={oneOnOneMode === 'grid' ? "Kembali ke mode PiP" : "Ubah ke mode Grid (Terbelah)"}
-              className={`p-3 sm:p-4 rounded-2xl transition-all duration-300 ${oneOnOneMode === 'grid' ? 'bg-indigo-600 shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-gray-800/80 hover:bg-gray-700'} text-white`}
+              className={`p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${oneOnOneMode === 'grid' ? 'bg-indigo-600 shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-gray-800/80 hover:bg-gray-700'} text-white`}
             >
-              <div dangerouslySetInnerHTML={{ __html: ICONS.layout }} />
+              <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.layout }} />
             </button>
           )}
 
@@ -991,9 +991,9 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
             <button 
               onClick={handleToggleBrowserPiP}
               title="Buka Popup Window"
-              className="p-3 sm:p-4 rounded-2xl transition-all duration-300 bg-gray-800/80 text-white hover:bg-gray-700"
+              className="hidden sm:block p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 bg-gray-800/80 text-white hover:bg-gray-700"
             >
-              <div dangerouslySetInnerHTML={{ __html: ICONS.pip }} />
+              <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.pip }} />
             </button>
           )}
 
@@ -1001,7 +1001,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
           <button
             onClick={toggleDataSaver}
             title={bandwidthMode === 'saver' ? 'Hemat -> HD' : bandwidthMode === 'hd' ? 'HD -> FHD' : 'FHD -> Hemat'}
-            className={`relative p-3 sm:p-4 rounded-2xl transition-all duration-300 group
+            className={`relative p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 group
               ${bandwidthMode === 'saver'
                 ? 'bg-emerald-600/80 text-white hover:bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]'
                 : bandwidthMode === 'hd'
@@ -1009,7 +1009,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
                 : 'bg-purple-600/80 text-white hover:bg-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.3)]'
               }`}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               {bandwidthMode === 'saver' ? (
                 <>
                   <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
@@ -1041,18 +1041,18 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
 
           <button
             onClick={() => { setIsChatOpen(!isChatOpen); if (!isChatOpen) setUnreadCount(0); }}
-            className={`relative p-3 sm:p-4 rounded-2xl transition-all duration-300 ${isChatOpen ? 'bg-indigo-600 text-white shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}
+            className={`relative p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${isChatOpen ? 'bg-indigo-600 text-white shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-gray-800/80 text-white hover:bg-gray-700'}`}
           >
-            <div dangerouslySetInnerHTML={{ __html: ICONS.chat }} />
+            <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.chat }} />
             {unreadCount > 0 && !isChatOpen && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border border-gray-900 animate-bounce">
                 {unreadCount > 9 ? '9+' : unreadCount}
               </span>
             )}
           </button>
-          <div className="w-px h-8 bg-white/20 mx-1"></div>
-          <button onClick={leave} className="p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg hover:scale-105 active:scale-95 transition-all">
-            <div className="rotate-[135deg]" dangerouslySetInnerHTML={{ __html: ICONS.hangup }} />
+          <div className="w-px h-6 sm:h-8 bg-white/20 mx-0.5 sm:mx-1 flex-shrink-0"></div>
+          <button onClick={leave} className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-r flex-shrink-0 from-red-600 to-red-500 text-white shadow-lg hover:scale-105 active:scale-95 transition-all">
+            <div className="rotate-[135deg] scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.hangup }} />
           </button>
         </div>
       </div>
@@ -1086,7 +1086,7 @@ function OneOnOneLayout({ localTrack, remoteTrack, mode, onSwap }) {
       {miniTrack && (
         <div 
           onClick={onSwap}
-          className="absolute top-4 right-4 w-32 md:w-64 aspect-video bg-black rounded-xl overflow-hidden border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.9)] cursor-pointer hover:scale-105 hover:border-white/50 transition-all z-10 duration-300 pip-mini"
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 w-24 sm:w-32 md:w-64 aspect-video bg-black rounded-xl overflow-hidden border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.9)] cursor-pointer hover:scale-105 hover:border-white/50 transition-all z-10 duration-300 pip-mini"
           title="Klik untuk menukar layar"
         >
            <ParticipantTile trackRef={miniTrack} className="w-full h-full" />
