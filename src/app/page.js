@@ -142,15 +142,15 @@ export default function Home() {
 
   if (!joined) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-white text-gray-800 p-4 font-sans relative overflow-hidden">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-indigo-50/40 to-purple-50/30 text-gray-800 p-4 font-sans relative overflow-hidden">
         <ParticleCanvas />
 
-        <div className="w-full max-w-md bg-white/80 backdrop-blur-3xl p-6 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.05)] border border-gray-200/50 z-10 animate-slide-up relative overflow-hidden group">
+        <div className="w-full max-w-md bg-white/95 backdrop-blur-3xl p-6 rounded-[2rem] shadow-[0_20px_80px_rgba(99,102,241,0.12),0_8px_32px_rgba(0,0,0,0.08)] border border-indigo-100/60 z-10 animate-slide-up relative overflow-hidden group">
           {/* Efek kilap on hover */}
           <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
 
           <div className="text-center mb-6 mt-2">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 mb-4 shadow-xl ring-4 ring-indigo-50 animate-float">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 mb-4 shadow-xl ring-4 ring-indigo-100 animate-float">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white drop-shadow-md" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
             </div>
             <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-1 tracking-tight">Lite-Meet</h1>
@@ -214,7 +214,7 @@ export default function Home() {
               )}
             </div>
 
-            <button onClick={joinRoom} disabled={loading} className="w-full bg-gray-900 hover:bg-black text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-gray-200 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2">
+            <button onClick={joinRoom} disabled={loading} className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-indigo-200/50 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2">
               {loading ? "Menghubungkan..." : "Mulai Meeting"}
             </button>
           </div>
@@ -375,79 +375,67 @@ const ParticleCanvas = () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
-    
     let particles = [];
-    let mouse = { x: null, y: null, radius: 120 };
+    let mouse = { x: null, y: null, radius: 180 };
+    let time = 0;
 
-    const handleMouseMove = (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    };
+    const handleMouseMove = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
+    const handleTouchMove = (e) => { if (e.touches[0]) { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; } };
+    const handleMouseLeave = () => { mouse.x = null; mouse.y = null; };
     window.addEventListener('mousemove', handleMouseMove);
-    
-    const handleMouseLeave = () => {
-      mouse.x = null;
-      mouse.y = null;
-    };
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('mouseout', handleMouseLeave);
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      init();
-    };
+    const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); };
     window.addEventListener('resize', resize);
 
     class Particle {
-      constructor(x, y, size, color) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.color = color;
-        this.baseX = this.x;
-        this.baseY = this.y;
-        this.density = (Math.random() * 30) + 1;
+      constructor(x, y, size, color, hue) {
+        this.x = x; this.y = y; this.size = size; this.color = color; this.hue = hue;
+        this.baseX = x; this.baseY = y;
+        this.density = (Math.random() * 40) + 5;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.life = Math.random() * Math.PI * 2;
       }
       draw() {
+        const pulse = 0.6 + Math.sin(this.life) * 0.4;
+        ctx.globalAlpha = pulse * 0.85;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.arc(this.x, this.y, this.size * (0.8 + Math.sin(this.life) * 0.2), 0, Math.PI * 2);
         ctx.fillStyle = this.color;
         ctx.fill();
+        // glow
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3);
+        g.addColorStop(0, this.color.replace(')', ',0.15)').replace('rgb', 'rgba'));
+        g.addColorStop(1, 'transparent');
+        ctx.fillStyle = g;
+        ctx.fill();
+        ctx.globalAlpha = 1;
       }
       update() {
-        if (mouse.x != null && mouse.y != null) {
-          let dx = mouse.x - this.x;
-          let dy = mouse.y - this.y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
-          let forceDirectionX = dx / distance;
-          let forceDirectionY = dy / distance;
-          let maxDistance = mouse.radius;
-          let force = (maxDistance - distance) / maxDistance;
-          let directionX = forceDirectionX * force * this.density;
-          let directionY = forceDirectionY * force * this.density;
+        this.life += 0.015;
+        // ambient drift
+        this.baseX += this.vx; this.baseY += this.vy;
+        if (this.baseX < 0 || this.baseX > canvas.width) this.vx *= -1;
+        if (this.baseY < 0 || this.baseY > canvas.height) this.vy *= -1;
 
-          if (distance < mouse.radius) {
-            this.x -= directionX;
-            this.y -= directionY;
+        if (mouse.x != null && mouse.y != null) {
+          let dx = mouse.x - this.x, dy = mouse.y - this.y;
+          let dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            let force = (mouse.radius - dist) / mouse.radius;
+            this.x -= (dx / dist) * force * this.density * 0.6;
+            this.y -= (dy / dist) * force * this.density * 0.6;
           } else {
-            if (this.x !== this.baseX) {
-              let dx = this.x - this.baseX;
-              this.x -= dx / 10;
-            }
-            if (this.y !== this.baseY) {
-              let dy = this.y - this.baseY;
-              this.y -= dy / 10;
-            }
+            this.x += (this.baseX - this.x) * 0.05;
+            this.y += (this.baseY - this.y) * 0.05;
           }
         } else {
-          if (this.x !== this.baseX) {
-            let dx = this.x - this.baseX;
-            this.x -= dx / 10;
-          }
-          if (this.y !== this.baseY) {
-            let dy = this.y - this.baseY;
-            this.y -= dy / 10;
-          }
+          this.x += (this.baseX - this.x) * 0.05;
+          this.y += (this.baseY - this.y) * 0.05;
         }
         this.draw();
       }
@@ -455,37 +443,57 @@ const ParticleCanvas = () => {
 
     const init = () => {
       particles = [];
-      const colors = ['#ef4444', '#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899'];
-      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 8000);
-      for (let i = 0; i < numberOfParticles; i++) {
-        let size = (Math.random() * 2) + 0.5;
-        let x = Math.random() * canvas.width;
-        let y = Math.random() * canvas.height;
-        let color = colors[Math.floor(Math.random() * colors.length)];
-        particles.push(new Particle(x, y, size, color));
+      const colors = [
+        'rgb(99,102,241)', 'rgb(139,92,246)', 'rgb(236,72,153)',
+        'rgb(59,130,246)', 'rgb(16,185,129)', 'rgb(245,158,11)'
+      ];
+      const count = Math.min(220, Math.floor((canvas.width * canvas.height) / 4000));
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle(
+          Math.random() * canvas.width, Math.random() * canvas.height,
+          (Math.random() * 2.5) + 1, colors[Math.floor(Math.random() * colors.length)], Math.random() * 360
+        ));
+      }
+    };
+
+    const connectParticles = () => {
+      const maxDist = 120;
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxDist) {
+            ctx.strokeStyle = `rgba(99,102,241,${0.08 * (1 - dist / maxDist)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
       }
     };
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-      }
+      time += 0.01;
+      for (let i = 0; i < particles.length; i++) particles[i].update();
+      connectParticles();
     };
 
-    resize();
-    animate();
-
+    resize(); animate();
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('mouseout', handleMouseLeave);
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none opacity-60" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 z-0" />;
 };
 
 function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
@@ -991,7 +999,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
             <button 
               onClick={handleToggleBrowserPiP}
               title="Buka Popup Window"
-              className="hidden sm:block p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 bg-gray-800/80 text-white hover:bg-gray-700"
+              className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 bg-gray-800/80 text-white hover:bg-gray-700"
             >
               <div className="scale-75 sm:scale-100" dangerouslySetInnerHTML={{ __html: ICONS.pip }} />
             </button>
