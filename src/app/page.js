@@ -145,80 +145,72 @@ export default function Home() {
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-indigo-50/40 to-purple-50/30 text-gray-800 p-4 font-sans relative overflow-hidden">
         <ParticleCanvas />
 
-        <div className="w-full max-w-md bg-white/95 backdrop-blur-3xl p-6 rounded-[2rem] shadow-[0_20px_80px_rgba(99,102,241,0.12),0_8px_32px_rgba(0,0,0,0.08)] border border-indigo-100/60 z-10 animate-slide-up relative overflow-hidden group">
+        <div className="w-full max-w-sm bg-gradient-to-b from-pink-50/80 to-white/95 backdrop-blur-3xl px-5 py-5 rounded-[1.5rem] shadow-[0_20px_80px_rgba(236,72,153,0.08),0_8px_32px_rgba(0,0,0,0.06)] border border-pink-100/60 z-10 animate-slide-up relative overflow-hidden group">
           {/* Efek kilap on hover */}
           <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-shine"></div>
 
-          <div className="text-center mb-6 mt-2">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 mb-4 shadow-xl ring-4 ring-indigo-100 animate-float">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white drop-shadow-md" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+          {/* Clock */}
+          <div className="absolute top-3 right-4 text-[10px] font-mono text-gray-400 font-medium z-10">{currentTime}</div>
+
+          <div className="text-center mb-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 mb-3 shadow-lg ring-3 ring-pink-100 animate-float">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
             </div>
-            <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 mb-1 tracking-tight">Lite-Meet</h1>
-            <p className="text-gray-500 text-xs tracking-[0.2em] font-bold uppercase relative inline-block">
-              <span className="absolute left-0 top-1/2 w-3 h-[1px] bg-gray-300 -translate-x-5"></span>
-              Video Conference
-              <span className="absolute right-0 top-1/2 w-3 h-[1px] bg-gray-300 translate-x-5"></span>
-            </p>
+            <h1 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 tracking-tight leading-tight">Lite-Meet</h1>
+            <p className="text-gray-400 text-[9px] tracking-[0.2em] font-bold uppercase mt-0.5">Video Conference</p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-2.5">
             <div>
-              <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block tracking-wider">Room Name</label>
-              <input className="w-full p-3 rounded-xl bg-gray-50 text-gray-800 border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all text-sm font-medium" placeholder="Ex: DailyScrum" onChange={(e) => setRoom(e.target.value)} value={room} />
+              <label className="text-[9px] font-bold text-gray-400 uppercase ml-1 mb-0.5 block tracking-wider">Room Name</label>
+              <input className="w-full px-3 py-2 rounded-lg bg-white text-gray-800 border border-gray-200 focus:border-pink-400 focus:ring-2 focus:ring-pink-100 outline-none transition-all text-sm font-medium" placeholder="Ex: DailyCall" onChange={(e) => setRoom(e.target.value)} value={room} />
             </div>
             <div>
-              <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-1 block tracking-wider">Display Name</label>
-              <input className="w-full p-3 rounded-xl bg-gray-50 text-gray-800 border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none transition-all text-sm font-medium" placeholder="Ex: Rangga" onChange={(e) => setName(e.target.value)} value={name} />
+              <label className="text-[9px] font-bold text-gray-400 uppercase ml-1 mb-0.5 block tracking-wider">Display Name</label>
+              <input className="w-full px-3 py-2 rounded-lg bg-white text-gray-800 border border-gray-200 focus:border-pink-400 focus:ring-2 focus:ring-pink-100 outline-none transition-all text-sm font-medium" placeholder="Ex: Ara" onChange={(e) => setName(e.target.value)} value={name} />
             </div>
 
-            {/* === MODE SELECTION (COMPACT) === */}
+            {/* === MODE SELECTION (ULTRA COMPACT) === */}
             <div>
-              <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 mb-2 block tracking-wider">Kualitas Video</label>
-              <div className="grid grid-cols-3 gap-2">
+              <label className="text-[9px] font-bold text-gray-400 uppercase ml-1 mb-1 block tracking-wider">Kualitas Video</label>
+              <div className="flex gap-1.5">
                 {Object.entries(BANDWIDTH_MODES).map(([key, mode]) => (
                   <button
                     key={key}
                     onClick={() => setBandwidthMode(key)}
-                    className={`relative p-2 rounded-xl border transition-all duration-300 text-center flex flex-col items-center justify-center gap-1
+                    className={`flex-1 px-1 py-1.5 rounded-lg border transition-all duration-200 text-center flex items-center justify-center gap-1
                       ${bandwidthMode === key
                         ? key === 'saver'
-                          ? 'bg-emerald-50 border-emerald-400 shadow-sm shadow-emerald-100 text-emerald-700'
-                          : key === 'hd' ? 'bg-blue-50 border-blue-400 shadow-sm shadow-blue-100 text-blue-700' : 'bg-purple-50 border-purple-400 shadow-sm shadow-purple-100 text-purple-700'
-                        : 'bg-white border-gray-200 text-gray-500 hover:border-gray-300 hover:bg-gray-50'
+                          ? 'bg-emerald-50 border-emerald-300 text-emerald-700 shadow-sm'
+                          : key === 'hd' ? 'bg-blue-50 border-blue-300 text-blue-700 shadow-sm' : 'bg-purple-50 border-purple-300 text-purple-700 shadow-sm'
+                        : 'bg-white border-gray-200 text-gray-400 hover:border-gray-300'
                       }`}
                   >
-                    <div className="text-lg leading-none">{mode.icon}</div>
-                    <div className={`text-[10px] font-bold ${bandwidthMode === key ? '' : 'text-gray-400'}`}>
-                      {mode.label}
-                    </div>
+                    <span className="text-xs leading-none">{mode.icon}</span>
+                    <span className={`text-[9px] font-bold ${bandwidthMode === key ? '' : 'text-gray-400'}`}>{key === 'saver' ? 'Hemat' : key.toUpperCase()}</span>
                   </button>
                 ))}
               </div>
-              {bandwidthMode === 'saver' && (
-                <div className="mt-2 px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-100 text-[10px] text-emerald-600 flex items-center gap-2 font-medium">
-                  <span>🌿</span>
-                  <span>Hemat kuota ~85% (360p)</span>
-                </div>
-              )}
-              {bandwidthMode === 'hd' && (
-                <div className="mt-2 px-3 py-1.5 rounded-lg bg-blue-50 border border-blue-100 text-[10px] text-blue-600 flex items-center gap-2 font-medium">
-                  <span>🎬</span>
-                  <span>Kualitas tinggi (720p)</span>
-                </div>
-              )}
-              {bandwidthMode === 'fhd' && (
-                <div className="mt-2 px-3 py-1.5 rounded-lg bg-purple-50 border border-purple-100 text-[10px] text-purple-600 flex items-center gap-2 font-medium">
-                  <span>⚠️</span>
-                  <span>Sangat Boros ~2.5 GB/jam (1080p)</span>
-                </div>
-              )}
+              <div className={`mt-1.5 px-2.5 py-1 rounded-md text-[9px] flex items-center gap-1.5 font-medium ${
+                bandwidthMode === 'saver' ? 'bg-emerald-50 border border-emerald-100 text-emerald-600'
+                : bandwidthMode === 'hd' ? 'bg-blue-50 border border-blue-100 text-blue-600'
+                : 'bg-purple-50 border border-purple-100 text-purple-600'
+              }`}>
+                <span>{bandwidthMode === 'saver' ? '🌿' : bandwidthMode === 'hd' ? '🎬' : '⚠️'}</span>
+                <span>{bandwidthMode === 'saver' ? 'Hemat ~85% (360p)' : bandwidthMode === 'hd' ? 'Kualitas tinggi (720p)' : 'Sangat Boros ~2.5 GB/jam (1080p)'}</span>
+              </div>
             </div>
 
-            <button onClick={joinRoom} disabled={loading} className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3.5 rounded-xl font-bold text-sm shadow-lg shadow-indigo-200/50 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2">
+            <button onClick={joinRoom} disabled={loading} className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-indigo-200/50 transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-1">
               {loading ? "Menghubungkan..." : "Mulai Meeting"}
             </button>
+            <p className="text-center text-[9px] text-gray-300 font-medium mt-1">Powered by Aralya @2026</p>
           </div>
         </div>
+
+        {/* Version info */}
+        <div className="absolute bottom-3 right-4 z-10 text-[9px] text-gray-400/60 font-mono">App Version 0.1.0</div>
+
         <style jsx>{`
           @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
           @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -316,18 +308,11 @@ function BandwidthMonitor({ bandwidthMode }) {
   const modeLabel = BANDWIDTH_MODES[bandwidthMode]?.label || '';
 
   return (
-    <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-[10px] sm:rounded-xl px-2 sm:px-3 py-1 sm:py-2 flex items-center gap-1.5 sm:gap-3 shadow-lg">
-      <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${statusDot} animate-pulse`}></div>
-      <div className="flex flex-col">
-        <div className={`text-[8px] sm:text-[10px] ${statusColor} font-bold uppercase tracking-wider leading-tight`}>
-          {modeLabel}
-        </div>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2 text-[9px] sm:text-[11px] leading-tight mt-0.5 sm:mt-0">
-          <span className="text-blue-300">↑ {stats.upload} KB/s</span>
-          <span className="text-gray-600 hidden sm:inline">│</span>
-          <span className="text-green-300">↓ {stats.download} KB/s</span>
-        </div>
-      </div>
+    <div className="flex items-center gap-1.5">
+      <div className={`w-1.5 h-1.5 rounded-full ${statusDot} animate-pulse`}></div>
+      <span className={`text-[8px] sm:text-[10px] ${statusColor} font-bold uppercase leading-none`}>{modeLabel}</span>
+      <span className="text-blue-300 text-[8px] sm:text-[10px]">↑{stats.upload}</span>
+      <span className="text-green-300 text-[8px] sm:text-[10px]">↓{stats.download}</span>
     </div>
   );
 }
@@ -501,7 +486,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
   const [unreadCount, setUnreadCount] = useState(0);
   const [toasts, setToasts] = useState([]);
   const { chatMessages, send } = useChat();
-  
+
   const [meetingStart] = useState(Date.now());
   const [durationStr, setDurationStr] = useState('00:00');
   const [isDesktopApp, setIsDesktopApp] = useState(false);
@@ -579,7 +564,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
         await document.exitPictureInPicture();
         return;
       }
-      
+
       const videos = document.querySelectorAll('video');
       // Cari video peserta lawan (bukan diri sendiri)
       let targetVideo = Array.from(videos).find(v => {
@@ -734,7 +719,8 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
 
   return (
     <div className="h-full w-full relative flex flex-col bg-gray-950 overflow-hidden font-sans">
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes borderDance {
           0% { background-position: 0% 0%; }
           100% { background-position: 200% 0%; }
@@ -763,17 +749,18 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
           }
         }
       `}} />
-      
+
       {/* --- PIP ANIMATED BORDER OVERLAY --- */}
       <div className="pip-border-overlay"></div>
 
-      {/* --- TOP LEFT INFOS (Bandwidth & Timer) --- */}
-      <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-50 flex flex-col sm:flex-row items-start sm:items-center gap-1.5 sm:gap-3 hide-in-pip max-w-[calc(100vw-110px)]">
-        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-[10px] sm:rounded-xl px-2.5 sm:px-4 flex items-center gap-1.5 sm:gap-2 shadow-lg h-8 sm:h-[46px]">
-          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 animate-pulse"></div>
-          <span className="text-white text-[11px] sm:text-sm font-mono font-bold tracking-widest leading-none">{durationStr}</span>
+      {/* --- TOP LEFT INFOS (Bandwidth & Timer) merged compact --- */}
+      <div className="absolute top-2 left-2 sm:top-3 sm:left-3 z-50 hide-in-pip">
+        <div className="bg-black/60 backdrop-blur-xl border border-white/10 rounded-xl px-2.5 sm:px-3 py-1.5 sm:py-2 flex items-center gap-2 sm:gap-3 shadow-lg">
+          <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+          <span className="text-white text-[10px] sm:text-xs font-mono font-bold tracking-wider leading-none">{durationStr}</span>
+          <div className="w-px h-3 bg-white/20"></div>
+          <BandwidthMonitor bandwidthMode={bandwidthMode} />
         </div>
-        <BandwidthMonitor bandwidthMode={bandwidthMode} />
       </div>
 
       {/* --- TOAST NOTIFICATIONS (TOP CENTER) --- */}
@@ -798,8 +785,8 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
             <h2 className="text-xl font-bold text-white mb-4">Choose what to share</h2>
             <div className="flex-grow overflow-y-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 custom-scrollbar">
               {desktopSources.map(source => (
-                <div 
-                  key={source.id} 
+                <div
+                  key={source.id}
                   onClick={() => {
                     window.electronAPI.selectDesktopSource(source.id);
                     setDesktopSources(null);
@@ -818,7 +805,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
               ))}
             </div>
             <div className="flex justify-end mt-6 pt-4 border-t border-white/10">
-              <button 
+              <button
                 onClick={() => {
                   window.electronAPI.selectDesktopSource(null);
                   setDesktopSources(null);
@@ -850,13 +837,13 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
               </div>
             </div>
           ) : remoteParticipants.length === 1 ? (
-             // --- 1vs1 CUSTOM LAYOUT ---
-             <OneOnOneLayout 
-                localTrack={cameraTracks.find(t => t.participant.identity === localParticipant?.identity)} 
-                remoteTrack={cameraTracks.find(t => t.participant.identity === remoteParticipants[0]?.identity)} 
-                mode={oneOnOneMode} 
-                onSwap={() => setOneOnOneMode(m => m === 'remote-main' ? 'local-main' : 'remote-main')}
-             />
+            // --- 1vs1 CUSTOM LAYOUT ---
+            <OneOnOneLayout
+              localTrack={cameraTracks.find(t => t.participant.identity === localParticipant?.identity)}
+              remoteTrack={cameraTracks.find(t => t.participant.identity === remoteParticipants[0]?.identity)}
+              mode={oneOnOneMode}
+              onSwap={() => setOneOnOneMode(m => m === 'remote-main' ? 'local-main' : 'remote-main')}
+            />
           ) : (
             // --- GRID LAYOUT ---
             <div className="flex-1 relative w-full h-full min-h-0">
@@ -985,7 +972,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
 
           {/* --- ONLY FOR 1v1: TOGGLE GRID/PIP --- */}
           {remoteParticipants.length === 1 && !isScreenSharing && (
-            <button 
+            <button
               onClick={() => setOneOnOneMode(m => m === 'grid' ? 'remote-main' : 'grid')}
               title={oneOnOneMode === 'grid' ? "Kembali ke mode PiP" : "Ubah ke mode Grid (Terbelah)"}
               className={`p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 ${oneOnOneMode === 'grid' ? 'bg-indigo-600 shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-gray-800/80 hover:bg-gray-700'} text-white`}
@@ -996,7 +983,7 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
 
           {/* --- BROWSER PIP (SEMBUNYIKAN KALAU DI DESKTOP NATIVE) --- */}
           {!isDesktopApp && (
-            <button 
+            <button
               onClick={handleToggleBrowserPiP}
               title="Buka Popup Window"
               className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-300 flex-shrink-0 bg-gray-800/80 text-white hover:bg-gray-700"
@@ -1013,31 +1000,31 @@ function MyVideoConference({ myName, bandwidthMode, setBandwidthMode }) {
               ${bandwidthMode === 'saver'
                 ? 'bg-emerald-600/80 text-white hover:bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]'
                 : bandwidthMode === 'hd'
-                ? 'bg-blue-600/80 text-white hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]'
-                : 'bg-purple-600/80 text-white hover:bg-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.3)]'
+                  ? 'bg-blue-600/80 text-white hover:bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]'
+                  : 'bg-purple-600/80 text-white hover:bg-purple-500 shadow-[0_0_20px_rgba(147,51,234,0.3)]'
               }`}
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               {bandwidthMode === 'saver' ? (
                 <>
-                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-                  <path d="M8 12l3 3 5-6"/>
+                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                  <path d="M8 12l3 3 5-6" />
                 </>
               ) : bandwidthMode === 'hd' ? (
                 <>
-                  <rect x="5" y="2" width="14" height="20" rx="2"/>
-                  <path d="M12 18h.01"/>
+                  <rect x="5" y="2" width="14" height="20" rx="2" />
+                  <path d="M12 18h.01" />
                 </>
               ) : (
                 <>
-                  <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
-                  <line x1="7" y1="2" x2="7" y2="22"/>
-                  <line x1="17" y1="2" x2="17" y2="22"/>
-                  <line x1="2" y1="12" x2="22" y2="12"/>
-                  <line x1="2" y1="7" x2="7" y2="7"/>
-                  <line x1="2" y1="17" x2="7" y2="17"/>
-                  <line x1="17" y1="17" x2="22" y2="17"/>
-                  <line x1="17" y1="7" x2="22" y2="7"/>
+                  <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
+                  <line x1="7" y1="2" x2="7" y2="22" />
+                  <line x1="17" y1="2" x2="17" y2="22" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <line x1="2" y1="7" x2="7" y2="7" />
+                  <line x1="2" y1="17" x2="7" y2="17" />
+                  <line x1="17" y1="17" x2="22" y2="17" />
+                  <line x1="17" y1="7" x2="22" y2="7" />
                 </>
               )}
             </svg>
@@ -1073,12 +1060,12 @@ function OneOnOneLayout({ localTrack, remoteTrack, mode, onSwap }) {
   if (mode === 'grid') {
     return (
       <div className="flex flex-col md:flex-row w-full h-full gap-4">
-         <div className="flex-1 rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl relative">
-            {localTrack && <ParticipantTile trackRef={localTrack} />}
-         </div>
-         <div className="flex-1 rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl relative">
-            {remoteTrack && <ParticipantTile trackRef={remoteTrack} />}
-         </div>
+        <div className="flex-1 rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl relative">
+          {localTrack && <ParticipantTile trackRef={localTrack} />}
+        </div>
+        <div className="flex-1 rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl relative">
+          {remoteTrack && <ParticipantTile trackRef={remoteTrack} />}
+        </div>
       </div>
     );
   }
@@ -1089,15 +1076,15 @@ function OneOnOneLayout({ localTrack, remoteTrack, mode, onSwap }) {
   return (
     <div className="w-full h-full relative rounded-2xl overflow-hidden bg-black border border-white/10 shadow-2xl pip-fullscreen">
       {mainTrack && <ParticipantTile trackRef={mainTrack} className="w-full h-full" />}
-      
+
       {/* Mini PiP */}
       {miniTrack && (
-        <div 
+        <div
           onClick={onSwap}
           className="absolute top-2 right-2 sm:top-4 sm:right-4 w-24 sm:w-32 md:w-64 aspect-video bg-black rounded-xl overflow-hidden border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.9)] cursor-pointer hover:scale-105 hover:border-white/50 transition-all z-10 duration-300 pip-mini"
           title="Klik untuk menukar layar"
         >
-           <ParticipantTile trackRef={miniTrack} className="w-full h-full" />
+          <ParticipantTile trackRef={miniTrack} className="w-full h-full" />
         </div>
       )}
     </div>
